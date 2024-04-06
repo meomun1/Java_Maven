@@ -32,29 +32,5 @@ public class MySqlJdbcCategoryDao implements CategoryDao {
 		return null;
 	}
 	
-	@Override
-	public List<CategoryDto> getCategories() {
-		try (var conn = DBUtils.getConnection(); 
-				var ps = conn.prepareStatement("SELECT * FROM category");
-				var rs = ps.executeQuery()) {
-			
-			List<CategoryDto> categories = new ArrayList<>();
-			
-			while (rs.next()) {
-				CategoryDto category = new CategoryDto();
-				category.setId(rs.getInt("id"));
-				category.setCategoryName(rs.getString("category_name"));
-				category.setImgName(rs.getString("img_name"));
-				categories.add(category);
-			}
-			
-			return categories;
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return null;
-	}
 
 }

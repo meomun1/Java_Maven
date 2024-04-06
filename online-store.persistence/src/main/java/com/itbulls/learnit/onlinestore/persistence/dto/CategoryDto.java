@@ -22,12 +22,5 @@ public class CategoryDto {
 		this.id = id;
 	}
 
-	public void setImgName(String imgName) {
-		this.imgName = imgName;
-	}
-
-	public String getImgName() {
-		return this.imgName;
-	}
 
 }

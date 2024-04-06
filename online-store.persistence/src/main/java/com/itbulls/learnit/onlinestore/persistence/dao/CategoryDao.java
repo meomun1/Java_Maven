@@ -8,6 +8,5 @@ public interface CategoryDao {
 
 	CategoryDto getCategoryByCategoryId(int id);
 	
-	List<CategoryDto> getCategories();
 
 }

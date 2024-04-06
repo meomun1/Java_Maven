@@ -10,7 +10,7 @@ import com.itbulls.learnit.onlinestore.persistence.enteties.impl.DefaultProduct;
 
 public class ProductDtoToProductConverter {
 	
-	private CategoryDtoToCategoryConverter categoryConverter;
+	private CategoryDtoToCategoryConverter categoryConverter; 
 	
 	{
 		categoryConverter = new CategoryDtoToCategoryConverter();
