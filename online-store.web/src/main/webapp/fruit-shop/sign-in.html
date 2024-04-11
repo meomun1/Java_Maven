@@ -32,7 +32,7 @@
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
-				<form class="login100-form validate-form">
+				<form class="login100-form validate-form" action="sign-in" method= "POST">
 					<span class="login100-form-title p-b-43">
 						Login to continue
 					</span>
@@ -46,7 +46,7 @@
 					
 					
 					<div class="wrap-input100 validate-input" data-validate="Password is required">
-						<input class="input100" type="password" name="pass">
+						<input class="input100" type="password" name="password">
 						<span class="focus-input100"></span>
 						<span class="label-input100">Password</span>
 					</div>
@@ -68,9 +68,8 @@
 			
 
 					<div class="container-login100-form-btn">
-						<button type = "submit" value="Sign-in" class="login100-form-btn" onclick="window.location.href='index.html'">
+						<button type = "submit" value="Sign-in" class="login100-form-btn"> <!-- onclick="window.location.href='index.html'" --> 
 						Sign-in</button>
-						
 						
 					</div>
 					
