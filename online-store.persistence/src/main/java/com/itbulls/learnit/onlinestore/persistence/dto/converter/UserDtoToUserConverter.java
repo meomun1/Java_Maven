@@ -41,15 +41,20 @@ public class UserDtoToUserConverter {
 	}
 	
 	public UserDto convertUserToUserDto(User user) {
-		UserDto userDto = new UserDto();
-		userDto.setId(user.getId());
-		userDto.setEmail(user.getEmail());
-		userDto.setFirstName(user.getFirstName());
-		userDto.setLastName(user.getLastName());
-		userDto.setPassword(user.getPassword());
-		userDto.setRoleDto(roleConverter.convertRoleNameToRoleDtoWithOnlyRoleName(user.getRoleName()));
-		userDto.setMoney(BigDecimal.valueOf(user.getMoney()));
-		userDto.setCreditCard(user.getCreditCard());
+		UserDto userDto = null;
+		if (user != null) {
+			userDto = new UserDto();
+			userDto.setId(user.getId());
+			userDto.setEmail(user.getEmail());
+			userDto.setFirstName(user.getFirstName());
+			userDto.setLastName(user.getLastName());
+			userDto.setPassword(user.getPassword());
+			userDto.setRoleDto(roleConverter.convertRoleNameToRoleDtoWithOnlyRoleName(user.getRoleName()));
+			userDto.setMoney(BigDecimal.valueOf(user.getMoney()));
+			userDto.setCreditCard(user.getCreditCard());
+			userDto.setPartnerCode(user.getPartnerCode());
+			userDto.setReferrerUser(convertUserToUserDto(user.getReferrerUser()));
+		}
 		
 		return userDto;
 	}
