@@ -19,9 +19,10 @@ public class ChangeEmailMenu implements Menu {
 	@Override
 	public void start() {
 		printMenuHeader();
-		Scanner sc = new Scanner(System.in);
-		String userInput = sc.next();
-		context.getLoggedInUser().setEmail(userInput);
+		try (Scanner sc = new Scanner(System.in)) {
+			String userInput = sc.next();
+			context.getLoggedInUser().setEmail(userInput);
+		}
 		System.out.println(rb.getString("mail.changed.msg"));
 		new MainMenu().start();
 	}

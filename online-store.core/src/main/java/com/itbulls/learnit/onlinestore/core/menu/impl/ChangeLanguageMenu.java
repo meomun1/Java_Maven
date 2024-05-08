@@ -4,7 +4,6 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
-import com.itbulls.learnit.onlinestore.core.configs.ApplicationContext;
 import com.itbulls.learnit.onlinestore.core.menu.Menu;
 
 public class ChangeLanguageMenu implements Menu {

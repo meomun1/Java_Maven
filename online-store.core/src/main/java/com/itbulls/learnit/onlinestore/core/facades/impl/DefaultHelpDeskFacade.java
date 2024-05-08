@@ -1,7 +1,6 @@
 package com.itbulls.learnit.onlinestore.core.facades.impl;
 
 import com.itbulls.learnit.onlinestore.core.facades.HelpDeskFacade;
-import com.itbulls.learnit.onlinestore.persistence.dto.converter.UserDtoToUserConverter;
 import com.itbulls.learnit.onlinestore.persistence.enteties.SupportTicket;
 
 public class DefaultHelpDeskFacade implements HelpDeskFacade {
