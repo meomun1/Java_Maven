@@ -1,5 +1,6 @@
 package com.itbulls.learnit.onlinestore.controllers;
 
+import com.itbulls.learnit.onlinestore.Configurations;
 import com.itbulls.learnit.onlinestore.core.facades.UserFacade;
 import com.itbulls.learnit.onlinestore.core.facades.impl.DefaultUserFacade;
 import com.itbulls.learnit.onlinestore.persistence.enteties.User;
@@ -18,7 +19,7 @@ import java.io.PrintWriter;
 /**
  * Servlet implementation class SignInFruitShop
  */
-@WebServlet("/fruit-shop/sign-in")
+@WebServlet("/sign-in")
 
 public class SignInFruitShop extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -31,31 +32,32 @@ public class SignInFruitShop extends HttpServlet {
 		userFacade = DefaultUserFacade.getInstance();
 	}
 
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.getRequestDispatcher(Configurations.VIEWS_PATH_RESOLVER 
+				+ "sign-in.jsp").forward(request, response);
+	}
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-		PrintWriter out = response.getWriter();
-
-		User user = userFacade.getUserByEmail(request.getParameter("email"));
-		
+	
+		User user = userFacade.getUserByEmail(request.getParameter("email")); // get user by email
+	
 		String baseUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 				+ request.getServletContext().getContextPath();
 
 		if (user != null && user.getPassword().equals(request.getParameter("password"))) {
 			
 			request.getSession().setAttribute(LOGGED_IN_USER_ATTR, user); // the current session is user with named "loggedInUser"
+
 			
 			if (user.getRoleName().equals(ADMIN_ROLE_NAME)) {
 				response.sendRedirect(baseUrl + "/admin/panel");
-				out.println("This is admin");
 			} else {
-				response.sendRedirect(baseUrl + "/fruit-shop/index.html");
-				out.println("This is customer success");
-			}
-			
+				response.sendRedirect(baseUrl + "/home-page");
+			}		
 		} else { // when password or email is invalid 
-			response.sendRedirect(baseUrl + "/fruit-shop/sign-in.html");
-			out.println("This is customer fail");
+			response.sendRedirect(request.getContextPath() + "/sign-in-error");
 		}
 	}
 
