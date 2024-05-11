@@ -15,7 +15,7 @@
 		<welcome-file>default.jsp</welcome-file>
 		-->
 		
-		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
 	<context-param>
 		<param-name>contextParam</param-name>
@@ -45,12 +45,12 @@
 		<location>/error-handler</location>
 	</error-page>
 	<error-page>
+        <error-code>404</error-code>
+        <location>/error-handler</location>
+    </error-page>
+	<error-page>
 		<exception-type>java.lang.NullPointerException</exception-type>
 		<location>/error-handler</location>
-	</error-page>
-	<error-page>
-		<error-code>404</error-code>
-		<location>/not-found</location>
 	</error-page>
 
 

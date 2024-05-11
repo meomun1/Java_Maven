@@ -618,3 +618,15 @@ input.input100 {
   background: #333333;
   color: #fff;
 }
+/*==================================================================*/
+
+.error-message {
+  color: #D8000C; /* Red color for error messages */
+  background-color: #FFD2D2; /* Light red background */
+  padding: 10px; /* Padding around the text */
+  margin: 10px 0; /* Margin above and below the error message */
+  border: 1px solid #D8000C; /* Red border */
+  border-radius: 5px; /* Rounded corners */
+  font-family: Arial, sans-serif; /* Font styling */
+  display: inline-block; /* Ensures the span acts like a block but only encases the text */
+}
