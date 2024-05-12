@@ -59,6 +59,14 @@ public class SignUpFruitShop extends HttpServlet {
 			return;
 		}
 
+		// Validate password confirmation
+		String passwordConfirmation = request.getParameter("repeat_password");
+		if (!password.equals(passwordConfirmation)) {
+			request.setAttribute("errorMessage", "Password confirmation does not match the password.");
+			request.getRequestDispatcher("/WEB-INF/views/sign-up.jsp").forward(request, response);
+			return;
+		}
+
 		User user = new DefaultUser();
 		user.setFirstName(request.getParameter("firstName"));
 		user.setLastName(request.getParameter("lastName"));

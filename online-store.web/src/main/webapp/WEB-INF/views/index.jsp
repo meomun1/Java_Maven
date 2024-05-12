@@ -122,7 +122,6 @@ prefix="fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
                   <c:if test="${loggedInUser != null}">
                     <li>
                       <a
-                        href="/online-store.web-1.0/sign-up"
                         style="font-size: 20px"
                         >Welcome
                         <c:if test="${loggedInUser != null}"
@@ -158,8 +157,8 @@ prefix="fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
           <h2>Get your desired product in Max-Luong-Shop</h2>
           <p>We have everything for you.</p>
           <form
-            action="/search-results.html"
-            method="get"
+            action="search-product-page"
+            method="post"
             style="
               display: flex;
               justify-content: center;
@@ -170,7 +169,7 @@ prefix="fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
           >
             <input
               type="text"
-              name="query"
+              name="searchQuery"
               placeholder="Search what you need"
               style="
                 width: 300px;
@@ -181,7 +180,7 @@ prefix="fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
             />
             <input
               type="submit"
-              value="Search"
+              value="query"
               style="
                 padding: 10px 20px;
                 border: none;
@@ -336,6 +335,193 @@ prefix="fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
     <!--/.welcome-hero-->
     <!--welcome-hero end -->
 
+    <!--featured-cars start -->
+    <section id="featured-cars" class="featured-cars">
+          <div class="container">
+            <div class="section-header">
+              <p>checkout <span>the</span> featured fruits</p>
+              <h2>featured Fruits</h2>
+            </div>
+            <!--/.section-header-->
+            <div class="featured-cars-content">
+              <div class="row">
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                  <div class="single-featured-cars">
+                    <div class="featured-img-box">
+                      <div class="featured-cars-img">
+                        <img src="images/featured-cars/banana.png" alt="cars" />
+                      </div>
+                      <div class="featured-model-info">
+                        <p>
+                          model: ****
+                          <span class="featured-mi-span"> Price: </span>
+                          <span class="featured-hp-span"> 5$/kg</span>
+                        </p>
+                      </div>
+                    </div>
+                    <div class="featured-cars-txt">
+                      <h2><a href="#">Banana fruit model</a></h2>
+
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                  <div class="single-featured-cars">
+                    <div class="featured-img-box">
+                      <div class="featured-cars-img">
+                        <img src="images/featured-cars/apple.png" alt="cars" />
+                      </div>
+                      <div class="featured-model-info">
+                        <p>
+                          model: ****
+                          <span class="featured-mi-span"> Price: </span>
+                          <span class="featured-hp-span"> 5$/kg</span>
+                        </p>
+                      </div>
+                    </div>
+                    <div class="featured-cars-txt">
+                      <h2>
+                        <a href="#">Apple fruit model</a>
+                      </h2>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                  <div class="single-featured-cars">
+                    <div class="featured-img-box">
+                      <div class="featured-cars-img">
+                        <img src="images/featured-cars/coconut.png" alt="cars" />
+                      </div>
+                      <div class="featured-model-info">
+                        <p>
+                          model: ****
+                          <span class="featured-mi-span"> Price: </span>
+                          <span class="featured-hp-span"> 5$/kg</span>
+                        </p>
+                      </div>
+                    </div>
+                    <div class="featured-cars-txt">
+                      <h2>
+                        <a href="#">Coconut fruit model</a>
+                      </h2>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                  <div class="single-featured-cars">
+                    <div class="featured-img-box">
+                      <div class="featured-cars-img">
+                        <img src="images/featured-cars/lemon.png" alt="cars" />
+                      </div>
+                      <div class="featured-model-info">
+                        <p>
+                          model: ****
+                          <span class="featured-mi-span"> Price: </span>
+                          <span class="featured-hp-span"> 5$/kg</span>
+                        </p>
+                      </div>
+                    </div>
+                    <div class="featured-cars-txt">
+                      <h2>
+                        <a href="#">Lemon fruit model</a>
+                      </h2>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                  <div class="single-featured-cars">
+                    <div class="featured-img-box">
+                      <div class="featured-cars-img">
+                        <img src="images/featured-cars/mango.png" alt="cars" />
+                      </div>
+                      <div class="featured-model-info">
+                        <p>
+                          model: ****
+                          <span class="featured-mi-span"> Price: </span>
+                          <span class="featured-hp-span"> 5$/kg</span>
+                        </p>
+                      </div>
+                    </div>
+                    <div class="featured-cars-txt">
+                      <h2>
+                        <a href="#">Mango fruit model</a>
+                      </h2>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                  <div class="single-featured-cars">
+                    <div class="featured-img-box">
+                      <div class="featured-cars-img">
+                        <img src="images/featured-cars/melon.png" alt="cars" />
+                      </div>
+                      <div class="featured-model-info">
+                        <p>
+                          model: ****
+                          <span class="featured-mi-span"> Price: </span>
+                          <span class="featured-hp-span"> 5$/kg</span>
+                        </p>
+                      </div>
+                    </div>
+                    <div class="featured-cars-txt">
+                      <h2>
+                        <a href="#">Melon fruit model</a>
+                      </h2>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                  <div class="single-featured-cars">
+                    <div class="featured-img-box">
+                      <div class="featured-cars-img">
+                        <img src="images/featured-cars/start_fruit.png" alt="cars" />
+                      </div>
+                      <div class="featured-model-info">
+                        <p>
+                          model: ****
+                          <span class="featured-mi-span"> Price: </span>
+                          <span class="featured-hp-span"> 5$/kg</span>
+                        </p>
+                      </div>
+                    </div>
+                    <div class="featured-cars-txt">
+                      <h2>
+                        <a href="#">Start fruit model</a>
+                      </h2>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                  <div class="single-featured-cars">
+                    <div class="featured-img-box">
+                      <div class="featured-cars-img">
+                        <img src="images/featured-cars/strawberry.png" alt="cars" />
+                      </div>
+                      <div class="featured-model-info">
+                        <p>
+                          model: ****
+                          <span class="featured-mi-span"> Price: </span>
+                          <span class="featured-hp-span"> 5$/kg</span>
+                        </p>
+                      </div>
+                    </div>
+                    <div class="featured-cars-txt">
+                      <h2>
+                        <a href="#">Strawberry fruit model</a>
+                      </h2>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--/.container-->
+    </section>
+    <!--/.featured-cars-->
+    <!--featured-cars end -->
+
     <!--service start -->
     <section id="service" class="service">
       <div class="container">
@@ -377,6 +563,7 @@ prefix="fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
     </section>
     <!--/.service-->
     <!--service end-->
+
 
     <!--new-cars start -->
     <section id="new-cars" class="new-cars">
@@ -505,238 +692,7 @@ prefix="fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
     <!--/.new-cars-->
     <!--new-cars end -->
 
-    <!--featured-cars start -->
-    <section id="featured-cars" class="featured-cars">
-      <div class="container">
-        <div class="section-header">
-          <p>checkout <span>the</span> featured fruits</p>
-          <h2>featured Fruits</h2>
-        </div>
-        <!--/.section-header-->
-        <div class="featured-cars-content">
-          <div class="row">
-            <div class="col-lg-3 col-md-4 col-sm-6">
-              <div class="single-featured-cars">
-                <div class="featured-img-box">
-                  <div class="featured-cars-img">
-                    <img src="images/featured-cars/fc1.png" alt="cars" />
-                  </div>
-                  <div class="featured-model-info">
-                    <p>
-                      model: ****
-                      <span class="featured-mi-span"> 3100 mi</span>
-                      <span class="featured-hp-span"> ****</span>
-                    </p>
-                  </div>
-                </div>
-                <div class="featured-cars-txt">
-                  <h2><a href="#">Banana fruit model</a></h2>
-                  <h3>$12</h3>
-                  <p>
-                    Neque porro quisquam est, qui dolorem ipsum quia dolor sit
-                    amet, consectetur, adipisci velit, sed quia non.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6">
-              <div class="single-featured-cars">
-                <div class="featured-img-box">
-                  <div class="featured-cars-img">
-                    <img src="images/featured-cars/fc2.png" alt="cars" />
-                  </div>
-                  <div class="featured-model-info">
-                    <p>
-                      model: 2017
-                      <span class="featured-mi-span"> 3100 mi</span>
-                      <span class="featured-hp-span"> 240HP</span>
-                      automatic
-                    </p>
-                  </div>
-                </div>
-                <div class="featured-cars-txt">
-                  <h2>
-                    <a href="#">chevrolet camaro <span>wmv20</span></a>
-                  </h2>
-                  <h3>$66,575</h3>
-                  <p>
-                    Neque porro quisquam est, qui dolorem ipsum quia dolor sit
-                    amet, consectetur, adipisci velit, sed quia non.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6">
-              <div class="single-featured-cars">
-                <div class="featured-img-box">
-                  <div class="featured-cars-img">
-                    <img src="images/featured-cars/fc3.png" alt="cars" />
-                  </div>
-                  <div class="featured-model-info">
-                    <p>
-                      model: 2017
-                      <span class="featured-mi-span"> 3100 mi</span>
-                      <span class="featured-hp-span"> 240HP</span>
-                      automatic
-                    </p>
-                  </div>
-                </div>
-                <div class="featured-cars-txt">
-                  <h2>
-                    <a href="#">lamborghini <span>v520</span></a>
-                  </h2>
-                  <h3>$125,250</h3>
-                  <p>
-                    Neque porro quisquam est, qui dolorem ipsum quia dolor sit
-                    amet, consectetur, adipisci velit, sed quia non.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6">
-              <div class="single-featured-cars">
-                <div class="featured-img-box">
-                  <div class="featured-cars-img">
-                    <img src="images/featured-cars/fc4.png" alt="cars" />
-                  </div>
-                  <div class="featured-model-info">
-                    <p>
-                      model: 2017
-                      <span class="featured-mi-span"> 3100 mi</span>
-                      <span class="featured-hp-span"> 240HP</span>
-                      automatic
-                    </p>
-                  </div>
-                </div>
-                <div class="featured-cars-txt">
-                  <h2>
-                    <a href="#">audi <span> a3</span> sedan</a>
-                  </h2>
-                  <h3>$95,500</h3>
-                  <p>
-                    Neque porro quisquam est, qui dolorem ipsum quia dolor sit
-                    amet, consectetur, adipisci velit, sed quia non.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-lg-3 col-md-4 col-sm-6">
-              <div class="single-featured-cars">
-                <div class="featured-img-box">
-                  <div class="featured-cars-img">
-                    <img src="images/featured-cars/fc4.png" alt="cars" />
-                  </div>
-                  <div class="featured-model-info">
-                    <p>
-                      model: 2017
-                      <span class="featured-mi-span"> 3100 mi</span>
-                      <span class="featured-hp-span"> 240HP</span>
-                      automatic
-                    </p>
-                  </div>
-                </div>
-                <div class="featured-cars-txt">
-                  <h2>
-                    <a href="#">infiniti <span>z5</span></a>
-                  </h2>
-                  <h3>$36,850</h3>
-                  <p>
-                    Neque porro quisquam est, qui dolorem ipsum quia dolor sit
-                    amet, consectetur, adipisci velit, sed quia non.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6">
-              <div class="single-featured-cars">
-                <div class="featured-img-box">
-                  <div class="featured-cars-img">
-                    <img src="images/featured-cars/fc5.png" alt="cars" />
-                  </div>
-                  <div class="featured-model-info">
-                    <p>
-                      model: 2017
-                      <span class="featured-mi-span"> 3100 mi</span>
-                      <span class="featured-hp-span"> 240HP</span>
-                      automatic
-                    </p>
-                  </div>
-                </div>
-                <div class="featured-cars-txt">
-                  <h2>
-                    <a href="#">porsche <span>718</span> cayman</a>
-                  </h2>
-                  <h3>$48,500</h3>
-                  <p>
-                    Neque porro quisquam est, qui dolorem ipsum quia dolor sit
-                    amet, consectetur, adipisci velit, sed quia non.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6">
-              <div class="single-featured-cars">
-                <div class="featured-img-box">
-                  <div class="featured-cars-img">
-                    <img src="images/featured-cars/fc7.png" alt="cars" />
-                  </div>
-                  <div class="featured-model-info">
-                    <p>
-                      model: 2017
-                      <span class="featured-mi-span"> 3100 mi</span>
-                      <span class="featured-hp-span"> 240HP</span>
-                      automatic
-                    </p>
-                  </div>
-                </div>
-                <div class="featured-cars-txt">
-                  <h2>
-                    <a href="#"><span>bmw 8-</span>series coupe</a>
-                  </h2>
-                  <h3>$56,000</h3>
-                  <p>
-                    Neque porro quisquam est, qui dolorem ipsum quia dolor sit
-                    amet, consectetur, adipisci velit, sed quia non.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="col-lg-3 col-md-4 col-sm-6">
-              <div class="single-featured-cars">
-                <div class="featured-img-box">
-                  <div class="featured-cars-img">
-                    <img src="images/featured-cars/fc8.png" alt="cars" />
-                  </div>
-                  <div class="featured-model-info">
-                    <p>
-                      model: 2017
-                      <span class="featured-mi-span"> 3100 mi</span>
-                      <span class="featured-hp-span"> 240HP</span>
-                      automatic
-                    </p>
-                  </div>
-                </div>
-                <div class="featured-cars-txt">
-                  <h2>
-                    <a href="#">BMW <span> x</span>series-6</a>
-                  </h2>
-                  <h3>$75,800</h3>
-                  <p>
-                    Neque porro quisquam est, qui dolorem ipsum quia dolor sit
-                    amet, consectetur, adipisci velit, sed quia non.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!--/.container-->
-    </section>
-    <!--/.featured-cars-->
-    <!--featured-cars end -->
+
 
     <!-- clients-say strat -->
     <section id="clients-say" class="clients-say">
