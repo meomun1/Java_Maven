@@ -32,6 +32,7 @@ public class ProductDtoToProductConverter {
 		product.setId(productDto.getId());
 		product.setPrice(productDto.getPrice().doubleValue());
 		product.setProductName(productDto.getProductName());
+		product.setProductType(productDto.getProductType());
 		if (productDto.getCategoryDto() != null)
 			product.setCategoryName(productDto.getCategoryDto().getCategoryName());
 		
@@ -54,6 +55,7 @@ public class ProductDtoToProductConverter {
 		productDto.setPrice(BigDecimal.valueOf(product.getPrice()));
 		productDto.setCategoryDto(categoryConverter.convertCategoryNameToCategoryDtoWithOnlyName(product.getCategoryName()));
 		productDto.setProductName(product.getProductName());
+		product.setProductType(productDto.getProductType());
 		return productDto;
 	}
 

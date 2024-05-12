@@ -8,15 +8,17 @@ public class DefaultProduct implements Product {
 	private String productName;
 	private String categoryName;
 	private double price;
+	private String productType;
 
 	public DefaultProduct() {
 	}
 	
-	public DefaultProduct(int id, String productName, String categoryName, double price) {
+	public DefaultProduct(int id, String productName, String categoryName, double price, String productType) {
 		this.id = id;
 		this.productName = productName;
 		this.categoryName = categoryName;
 		this.price = price;
+		this.productType = productType;
 	}
 
 	@Override
@@ -63,6 +65,18 @@ public class DefaultProduct implements Product {
 	@Override
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
+	}
+
+	@Override
+	public String getProductType() {
+		// TODO Auto-generated method stub
+		return this.productType;
+	}
+
+	@Override
+	public void setProductType(String productType) {
+		// TODO Auto-generated method stub
+		this.productType = productType;
 	}
 	
 }

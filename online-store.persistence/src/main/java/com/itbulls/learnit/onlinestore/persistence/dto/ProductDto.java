@@ -8,6 +8,7 @@ public class ProductDto {
 	private String productName;
 	private BigDecimal price;
 	private CategoryDto categoryDto;
+	private String productType;
 	
 	public int getId() {
 		return id;
@@ -33,5 +34,12 @@ public class ProductDto {
 	public void setCategoryDto(CategoryDto categoryDto) {
 		this.categoryDto = categoryDto;
 	}
+	public String getProductType() {
+		return productType;
+	}
+	public void setProducType(String productType) {
+		this.productType = productType;
+	}
+
 
 }

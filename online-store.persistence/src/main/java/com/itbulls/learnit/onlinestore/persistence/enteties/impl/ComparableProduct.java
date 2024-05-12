@@ -70,4 +70,16 @@ public class ComparableProduct implements Product, Comparable<Product> {
 		this.categoryName = categoryName;
 	}
 
+	@Override
+	public String getProductType() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'getProductType'");
+	}
+
+	@Override
+	public void setProductType(String productType) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'setProductType'");
+	}
+
 }

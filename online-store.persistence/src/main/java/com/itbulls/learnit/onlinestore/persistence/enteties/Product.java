@@ -19,4 +19,8 @@ public interface Product extends Serializable {
 	double getPrice();
 
 	void setPrice(double price);
+
+	String getProductType();
+
+	void setProductType(String productType);
 }
