@@ -20,11 +20,9 @@ public class DefaultProductFacade implements ProductFacade {
 
         return instance;
     }
-    
 
     @Override
     public List<Product> getProductsLikeName(String searchQuery) {
-        // TODO Auto-generated method stub
         return productConverter.convertProductDtosToProducts(productDao.getProductsLikeName(searchQuery));
     }
 
@@ -37,7 +35,8 @@ public class DefaultProductFacade implements ProductFacade {
     public List<Product> getProductsByCategoryIdForPageWithLimit(Integer categoryId, Integer page,
             Integer paginationLimit) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getProductsByCategoryIdForPageWithLimit'");
+        return productConverter.convertProductDtosToProducts(
+                productDao.getProductsByCategoryIdPaginationLimit(categoryId, page, paginationLimit));
     }
 
     @Override
@@ -48,21 +47,22 @@ public class DefaultProductFacade implements ProductFacade {
 
     @Override
     public Integer getNumberOfPagesForSearch(String searchQuery, Integer paginationLimit) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getNumberOfPagesForSearch'");
+        double productCount = productDao.getProductCountForSearch(searchQuery);
+        return (int) Math.ceil(productCount / paginationLimit);
     }
 
     @Override
     public List<Product> getProductsLikeNameForPageWithLimit(String searchQuery, Integer page,
             Integer paginationLimit) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getProductsLikeNameForPageWithLimit'");
+        return productConverter.convertProductDtosToProducts(
+                productDao.getProductsLikeNameForPageWithLimit(searchQuery, page, paginationLimit));
     }
 
     @Override
     public Product getProductById(Integer parameter) {
         // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getProductById'");
+        return productConverter.convertProductDtoToProduct(productDao.getProductById(parameter));
     }
 
     @Override
@@ -70,5 +70,5 @@ public class DefaultProductFacade implements ProductFacade {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'getProductByGuid'");
     }
-    
+
 }
