@@ -1,5 +1,6 @@
 package com.itbulls.learnit.onlinestore.persistence.dao.impl;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,16 @@ public class MySqlJdbcProductDao implements ProductDao {
 		categoryDao = new MySqlJdbcCategoryDao();
 	}
 
+	private ProductDto populateProductDto(ResultSet rs) throws SQLException {
+		ProductDto product = new ProductDto();
+		product.setId(rs.getInt("id"));
+		product.setProductName(rs.getString("product_name"));
+		product.setPrice(rs.getBigDecimal("price"));
+		product.setCategoryDto(categoryDao.getCategoryByCategoryId(rs.getInt("category_id")));
+		product.setProducType(rs.getString("product_type"));
+		return product;
+	}
+
 	@Override
 	public List<ProductDto> getProducts() {
 		try (var conn = DBUtils.getConnection();
@@ -25,12 +36,7 @@ public class MySqlJdbcProductDao implements ProductDao {
 			List<ProductDto> products = new ArrayList<>();
 
 			while (rs.next()) {
-				ProductDto product = new ProductDto();
-				product.setId(rs.getInt("id"));
-				product.setProductName(rs.getString("product_name"));
-				product.setPrice(rs.getBigDecimal("price"));
-				product.setCategoryDto(categoryDao.getCategoryByCategoryId(rs.getInt("category_id")));
-				product.setProducType(rs.getString("product_type"));
+				ProductDto product = populateProductDto(rs);
 				products.add(product);
 			}
 
@@ -65,24 +71,18 @@ public class MySqlJdbcProductDao implements ProductDao {
 		return null;
 	}
 
-
 	@Override
 	public List<ProductDto> getProductsLikeName(String searchQuery) {
 
 		String lowercaseString = searchQuery.toLowerCase();
 		// TODO Auto-generated method stub
-		try(var conn = DBUtils.getConnection();
+		try (var conn = DBUtils.getConnection();
 				var ps = conn.prepareStatement("SELECT * FROM product WHERE product_type LIKE ?")) {
 			ps.setString(1, "%" + lowercaseString + "%");
 			List<ProductDto> products = new ArrayList<>();
 			try (var rs = ps.executeQuery()) {
 				while (rs.next()) {
-					ProductDto product = new ProductDto();
-					product.setId(rs.getInt("id"));
-					product.setProductName(rs.getString("product_name"));
-					product.setPrice(rs.getBigDecimal("price"));
-					product.setCategoryDto(categoryDao.getCategoryByCategoryId(rs.getInt("category_id")));
-					product.setProducType(rs.getString("product_type"));
+					ProductDto product = populateProductDto(rs);
 					products.add(product);
 				}
 			}
@@ -103,12 +103,7 @@ public class MySqlJdbcProductDao implements ProductDao {
 			List<ProductDto> products = new ArrayList<>();
 			try (var rs = ps.executeQuery()) {
 				while (rs.next()) {
-					ProductDto product = new ProductDto();
-					product.setId(rs.getInt("id"));
-					product.setProductName(rs.getString("product_name"));
-					product.setPrice(rs.getBigDecimal("price"));
-					product.setCategoryDto(categoryDao.getCategoryByCategoryId(rs.getInt("category_id")));
-					product.setProducType(rs.getString("product_type"));
+					ProductDto product = populateProductDto(rs);
 					products.add(product);
 				}
 			}
@@ -122,28 +117,86 @@ public class MySqlJdbcProductDao implements ProductDao {
 	@Override
 	public List<ProductDto> getProductsByCategoryIdPaginationLimit(Integer categoryId, Integer page,
 			Integer paginationLimit) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'getProductsByCategoryIdPaginationLimit'");
+		try (var conn = DBUtils.getConnection();
+				var ps = conn.prepareStatement("SELECT * FROM product WHERE category_id = ? LIMIT ? OFFSET ?")) {
+
+			ps.setInt(1, categoryId);
+			ps.setInt(2, paginationLimit);
+			ps.setInt(3, (page - 1) * paginationLimit);
+
+			List<ProductDto> products = new ArrayList<>();
+			try (var rs = ps.executeQuery()) {
+				while (rs.next()) {
+					ProductDto product = populateProductDto(rs);
+					products.add(product);
+				}
+			}
+			return products;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	@Override
 	public Integer getProductCountForCategory(Integer categoryId) {
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'getProductCountForCategory'");
+		try (var conn = DBUtils.getConnection();
+				var ps = conn.prepareStatement("SELECT COUNT(*) FROM product WHERE category_id = ?")) {
+			ps.setInt(1,categoryId);
+			try (var rs = ps.executeQuery()) {
+				if (rs.next()) {
+					return rs.getInt(1);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
 	}
 
 	@Override
 	public Integer getProductCountForSearch(String searchQuery) {
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'getProductCountForSearch'");
+		String lowercaseString = searchQuery.toLowerCase();
+
+		try (var conn = DBUtils.getConnection();
+				var ps = conn.prepareStatement("SELECT COUNT(*) FROM product WHERE product_type LIKE ?")) {
+			ps.setString(1, "%" + lowercaseString + "%");
+			try (var rs = ps.executeQuery()) {
+				if (rs.next()) {
+					return rs.getInt(1);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return 0;
 	}
 
 	@Override
 	public List<ProductDto> getProductsLikeNameForPageWithLimit(String searchQuery, Integer page,
 			Integer paginationLimit) {
 		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'getProductsLikeNameForPageWithLimit'");
-	}
+		try (var conn = DBUtils.getConnection();
+				var ps = conn.prepareStatement("SELECT * FROM product WHERE product_type LIKE ? LIMIT ? OFFSET ?")) {
 
+			ps.setString(1, searchQuery);
+			ps.setInt(2, paginationLimit);
+			ps.setInt(3, (page - 1) * paginationLimit);
+
+			List<ProductDto> products = new ArrayList<>();
+			try (var rs = ps.executeQuery()) {
+				while (rs.next()) {
+					ProductDto product = populateProductDto(rs);
+					products.add(product);
+				}
+			}
+			return products;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 }

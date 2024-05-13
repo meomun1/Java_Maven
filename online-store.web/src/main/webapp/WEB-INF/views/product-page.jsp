@@ -26,14 +26,14 @@
         </nav>
     </header>
 
-    <main>
+    <div>
 
         <c:if test="${products != null}">
-
-            <c:forEach items = "${products}" var = "product">
-
+            <c:forEach items="${products}" var="product">
                 <section class="product-display">
-                    <img src="images/product/${product.productType}/apple.png" alt="${product.productName}" id="productImage">
+                    <a href="/online-store.web-1.0/product-detail?productId=${product.id}">
+                        <img src="images/product/${product.productType}/apple.png" alt="${product.productName}" id="productImage">
+                    </a>
                     <h2 id="productName">${product.productName}</h2>
                     <span id="productPrice">${product.price}</span>
                     <button onclick="addToCart()">Add to Cart</button>
@@ -45,9 +45,23 @@
             <p>No products available, please come back to home </p>
         </c:if>
 
-    <footer>
-        <p>&copy; 2024 Fruit Market</p>
-    </footer>
+
+        <c:if test="${products != null}">
+            <!-- Pagination -->
+            <div class="pagination">
+                <c:forEach begin="1" end="${numberOfPages}" var="i">
+                    <c:choose>
+                        <c:when test="${i == currentPage}">
+                            <span class="active">${i}</span>
+                        </c:when>
+                        <c:otherwise>
+                            <a href="/online-store.web-1.0/search-product-page?page=${i}&searchQuery=${searchQuery}">${i}</a>
+                        </c:otherwise>
+                    </c:choose>
+                </c:forEach>
+            </div>
+        </c:if>
+    </div>
 
     <script src="script.js"></script>
 </body>

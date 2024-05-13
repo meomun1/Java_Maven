@@ -1,11 +1,9 @@
 package com.itbulls.learnit.onlinestore.controllers;
 
-import com.itbulls.learnit.onlinestore.Configurations;
 import com.itbulls.learnit.onlinestore.core.facades.UserFacade;
 import com.itbulls.learnit.onlinestore.core.facades.impl.DefaultUserFacade;
 import com.itbulls.learnit.onlinestore.persistence.enteties.User;
 import com.itbulls.learnit.onlinestore.persistence.enteties.impl.DefaultUser;
-import static com.itbulls.learnit.onlinestore.persistence.dto.RoleDto.*;
 import static com.itbulls.learnit.onlinestore.filters.PartnerCodeFilter.*;
 
 import jakarta.servlet.ServletException;

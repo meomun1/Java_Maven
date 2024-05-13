@@ -3,7 +3,7 @@ package com.itbulls.learnit.onlinestore.persistence.enteties.impl;
 import com.itbulls.learnit.onlinestore.persistence.enteties.Product;
 
 public class DefaultProduct implements Product {
-	
+
 	private int id;
 	private String productName;
 	private String categoryName;
@@ -12,7 +12,7 @@ public class DefaultProduct implements Product {
 
 	public DefaultProduct() {
 	}
-	
+
 	public DefaultProduct(int id, String productName, String categoryName, double price, String productType) {
 		this.id = id;
 		this.productName = productName;
@@ -78,5 +78,5 @@ public class DefaultProduct implements Product {
 		// TODO Auto-generated method stub
 		this.productType = productType;
 	}
-	
+
 }
