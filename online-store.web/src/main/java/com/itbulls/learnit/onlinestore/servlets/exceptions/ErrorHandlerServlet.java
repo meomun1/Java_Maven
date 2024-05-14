@@ -51,11 +51,9 @@ public class ErrorHandlerServlet extends HttpServlet {
          out.println("p, a { color: #007BFF; text-decoration: none; font-size: 1.5em; }");
          out.println("p { margin-top: 10px; font-size: 1.2em; color: #555; }");
          out.println("</style>");
-         out.println("<h2>Error information is missing 404</h2>"); // h2 tag
+         out.println("<h2>Error information is missing 404 :) </h2>"); // h2 tag
          out.println("<p>Please return to the</p>"); // p tag
-         out.println("<a href=\"/home-page" +
-               response.encodeURL("http://localhost:8080/" + getServletContext().getContextPath()) +
-               "\">Home Page</a>.");
+         out.println("<a href=\" /online-store.web-1.0/home-page\">Home Page</a>.");
       }
 
       if (statusCode != null) {
@@ -68,9 +66,7 @@ public class ErrorHandlerServlet extends HttpServlet {
          out.println("</style>");
          out.println("<h2>Error information is missing 404</h2>"); // h2 tag
          out.println("<p>Please return to the</p>"); // p tag
-         out.println("<a href=\"/home-page" +
-               response.encodeURL("http://localhost:8080/" + getServletContext().getContextPath()) +
-               "\">Home Page</a>.");
+         out.println("<a href=\" /online-store.web-1.0/home-page\">Home Page</a>.");
       }
       if (throwable != null) {
          out.println("Exception Type : " + throwable.getClass().getName() + "</br></br>");

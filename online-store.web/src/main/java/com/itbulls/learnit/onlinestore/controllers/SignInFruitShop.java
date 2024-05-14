@@ -23,6 +23,7 @@ public class SignInFruitShop extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	public static final String LOGGED_IN_USER_ATTR = "loggedInUser";
+	public static final String PARTNER_CODE_PARAMETER_NAME = "partner_code";
 
 	private UserFacade userFacade;
 
@@ -49,6 +50,7 @@ public class SignInFruitShop extends HttpServlet {
 
 			request.getSession().setAttribute(LOGGED_IN_USER_ATTR, user); // the current session is user with named
 																			// "loggedInUser"
+			request.getSession().setAttribute(PARTNER_CODE_PARAMETER_NAME, user.getPartnerCode());															
 
 			if (user.getRoleName().equals(ADMIN_ROLE_NAME)) {
 				response.sendRedirect(baseUrl + "/admin/panel");
