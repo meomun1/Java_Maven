@@ -9,6 +9,8 @@ public class DefaultProduct implements Product {
 	private String categoryName;
 	private double price;
 	private String productType;
+	private String imgName;
+	private String description;
 
 	public DefaultProduct() {
 	}
@@ -77,6 +79,30 @@ public class DefaultProduct implements Product {
 	public void setProductType(String productType) {
 		// TODO Auto-generated method stub
 		this.productType = productType;
+	}
+
+	@Override
+	public void setImgName(String imgName) {
+		// TODO Auto-generated method stub
+		this.imgName = imgName;
+	}
+
+	@Override
+	public void setDescription(String description) {
+		// TODO Auto-generated method stub
+		this.description = description;
+	}
+
+	@Override
+	public String getImgName() {
+		// TODO Auto-generated method stub
+		return this.imgName;
+	}
+
+	@Override
+	public String getDescription() {
+		// TODO Auto-generated method stub
+		return this.description;
 	}
 
 }

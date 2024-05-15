@@ -34,15 +34,18 @@ public class DefaultProductFacade implements ProductFacade {
     @Override
     public List<Product> getProductsByCategoryIdForPageWithLimit(Integer categoryId, Integer page,
             Integer paginationLimit) {
-        // TODO Auto-generated method stub
         return productConverter.convertProductDtosToProducts(
                 productDao.getProductsByCategoryIdPaginationLimit(categoryId, page, paginationLimit));
     }
 
     @Override
     public Integer getNumberOfPagesForCategory(Integer categoryId, Integer paginationLimit) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getNumberOfPagesForCategory'");
+        Integer productCount = productDao.getProductCountForCategory(categoryId);
+        int pages = productCount / paginationLimit;
+        if (productCount % paginationLimit != 0) {
+            pages++;
+        }
+        return pages;
     }
 
     @Override
