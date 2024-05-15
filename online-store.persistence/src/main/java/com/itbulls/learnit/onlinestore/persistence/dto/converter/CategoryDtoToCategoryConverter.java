@@ -15,4 +15,22 @@ public class CategoryDtoToCategoryConverter {
 		return categoryDto;
 	}
 
+	public List<Category> convertCategoryDtosToCategories(List<CategoryDto> categoryDtos){
+		List<Category> categories = new ArrayList<>();
+
+		for(CategoryDto categoryDto : categoryDtos){
+			categories.add(convertCategoryDtoToCategory(categoryDto));
+		}
+
+		return categories;
+	}
+
+	public Category convertCategoryDtoToCategory(CategoryDto categoryDto){
+		DefaultCategory category = new DefaultCategory();
+		category.setId(categoryDto.getId());
+		category.setCategoryName(categoryDto.getCategoryName());
+		category.setImgName(categoryDto.getImgName());
+		return category;
+	}
+
 }
