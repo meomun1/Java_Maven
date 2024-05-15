@@ -53,4 +53,16 @@ public class DefaultUserFacade implements UserFacade{
 	public User getUserById(int userId){
 		return userConverter.convertUserDtoToUser(userDao.getUserById(userId));
 	}
+
+	@Override
+	public void updateUser(User user) {
+		// TODO Auto-generated method stub
+		userDao.updateUser(userConverter.convertUserToUserDto(user));
+	}
+
+	@Override
+	public List<User> getReferralsForUser(User loggedInUser) {
+		// TODO Auto-generated method stub
+		return userConverter.convertUserDtosToUsers(userDao.getReferralsByUserId(loggedInUser.getId()));
+	}
 }
