@@ -94,7 +94,7 @@ prefix="fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
                   data-toggle="collapse"
                   data-target="#navbar-menu"
                 >
-                  <i class="fa fa-bars"></i>s
+                  <i class="fa fa-bars"></i>
                 </button>
                 <a class="navbar-brand" href="">Max Luong<span></span></a>
               </div>

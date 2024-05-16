@@ -1,4 +1,25 @@
+<%@ page language ="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+
+<%@ taglib prefix="fn" uri = "http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
+<%@ taglib prefix="x" uri="http://java.sun.com/jsp/jstl/xml" %>
+
+<%@ taglib prefix="shop" tagdir="/WEB-INF/tags"%>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Active Orders</title>
+    <link rel="stylesheet" href="css/order_page/order-page.css">
+    <shop:indexcss />
+</head>
+<body>
 
     <section id="home" class="welcome-hero">
         <!-- top-area Start -->
@@ -26,7 +47,7 @@
                 </div>
                 <!--/.navbar-header-->
                 <!-- End Header Navigation -->
-  
+    
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div
                   class="collapse navbar-collapse menu-ui-design"
@@ -44,7 +65,7 @@
                     </li> -->
                     <li class="scroll"><a href="#new-cars">new product</a></li>
                     <li class="scroll"><a href="#contact">contact</a></li>
-  
+    
                     <c:if test="${loggedInUser != null}">
                       <li>
                         <a
@@ -55,7 +76,7 @@
                           >
                         </a>
                       </li>
-  
+    
                       <li><a href="/online-store.web-1.0/sign-out">sign out</a></li>
                     </c:if>
                     
@@ -78,6 +99,51 @@
         </div>
         <!-- /.top-area-->
         <!-- top-area End -->
-
-  
+    
+    
     </section>
+
+    <section id="featured-cars" class="featured-cars">
+
+        <h1>Active Orders</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Order Id</th>
+                        <th>User Email</th>
+                        <th>Order Status</th>
+                        <th>Action Button</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>13</td>
+                        <td>p.skomorohov@email.com</td>
+                        <td>payed</td>
+                        <td><button onclick="markAsCompleted(13)">Mark Fulfilment Stage as Completed</button></td>
+                    </tr>
+                    <tr>
+                        <td>14</td>
+                        <td>a.pavlenko@email.coma</td>
+                        <td>shipping</td>
+                        <td><button onclick="markAsCompleted(14)">Mark Fulfilment Stage as Completed</button></td>
+                    </tr>
+                    <tr>
+                        <td>15</td>
+                        <td>s.ivanov@email.com</td>
+                        <td>receive_request</td>
+                        <td><button onclick="markAsCompleted(15)">Mark Fulfilment Stage as Completed</button></td>
+                    </tr>
+                    <!-- Add more rows as needed -->
+                </tbody>
+            </table>
+         </section>
+    
+    <shop:footer />
+
+    <shop:indexjs />
+
+
+    <script src="/js/order.js"></script>
+</body>
+</html>
