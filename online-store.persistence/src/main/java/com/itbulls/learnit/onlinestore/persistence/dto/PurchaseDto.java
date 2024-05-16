@@ -7,8 +7,7 @@ public class PurchaseDto {
 	private Integer id;
 	private UserDto userDto;
 	private List<ProductDto> productDtos;
-	private String imgName;
-	private String description;
+	private PurchaseStatusDto purchaseStatusDto;
 	
 	public Integer getId() {
 		return id;
@@ -29,17 +28,12 @@ public class PurchaseDto {
 		this.productDtos = productDtos;
 	}
 
-	public void setImgName(String imgName) {
-		this.imgName = imgName;
+	public PurchaseStatusDto getPurchaseStatusDto() {
+		return purchaseStatusDto;
 	}
-	public String getImgName() {
-		return this.imgName;
-	}
-	public String getDescription() {
-		return this.description;
-	}
-	public void setDescription(String description) {
-		this.description = description;
+
+	public void setPurchaseStatusDto(PurchaseStatusDto purchaseStatusDto) {
+		this.purchaseStatusDto = purchaseStatusDto;
 	}
 
 	

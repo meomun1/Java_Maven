@@ -13,8 +13,18 @@ public interface Purchase extends Serializable {
 	
 	List<Product> getProducts();
 
-	void setCustomerId(int customerId);
-	
-	int getCustomerId();
+	void setCustomer(User customer);
+
+	User getCustomer();
+
+	void setPurchaseStatus(PurchaseStatus purchaseStatus);
+
+	PurchaseStatus getPurchaseStatus();
+
+	void setId(Integer id);
+
+	Integer getId();
+
+	double getTotalPurchaseCost();
 
 }
