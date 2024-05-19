@@ -15,19 +15,16 @@ import com.itbulls.learnit.onlinestore.core.facades.impl.DefaultProductFacade;
 
 public class SearchProductFruitShop extends HttpServlet {
 
-	private static final long serialVersionUID = 1L;
-
-	private ProductFacade productFacade;
-	{
-		productFacade = DefaultProductFacade.getInstance();
-	}
+	private ProductFacade productFacade = DefaultProductFacade.getInstance();
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String searchQuery = request.getParameter("searchQuery");
+
 		String pageParam = request.getParameter("page");
 		Integer page = (pageParam != null && !pageParam.isEmpty()) ? Integer.valueOf(pageParam) : 1;
+		
 		Integer numberOfPages = productFacade.getNumberOfPagesForSearch(searchQuery, Configurations.PAGINATION_LIMIT);
 
 		request.setAttribute("searchQuery", searchQuery);

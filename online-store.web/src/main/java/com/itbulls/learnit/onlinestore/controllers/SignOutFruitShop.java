@@ -16,9 +16,18 @@ public class SignOutFruitShop extends HttpServlet {
     public static final String LOGGED_IN_USER_ATTR = "loggedInUser";
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         request.getSession().invalidate();
-        response.sendRedirect(request.getContextPath() + "/home-page");
+
+        String baseUrl = request.getScheme()
+                + "://"
+                + request.getServerName()
+                + ":"
+                + request.getServerPort()
+                + request.getServletContext().getContextPath();
+
+        response.sendRedirect(baseUrl + "/home-page");
     }
-    
+
 }

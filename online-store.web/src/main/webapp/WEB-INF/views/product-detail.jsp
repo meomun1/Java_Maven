@@ -108,7 +108,7 @@
         <div class="product-container">
             <c:if test = "${product != null}">
                 <div class="product-image">
-                    <img src="images/product/${product.productType}/apple.png" alt="${product.productName}">
+                    <img src="images/product/${product.getProductType()}/${product.getImgName()}" alt="${product.productName}">
                 </div>
                 <div class="product-details">
                     <h1>${product.productName}</h1>

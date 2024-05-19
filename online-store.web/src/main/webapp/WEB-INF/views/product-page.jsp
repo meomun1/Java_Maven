@@ -112,7 +112,7 @@
             <c:forEach items="${products}" var="product">
                 <section class="product-display">
                     <a href="/online-store.web-1.0/product-detail?productId=${product.id}">
-                        <img src="images/product/${product.productType}/apple.png" alt="${product.productName}" id="productImage">
+                        <img src="images/product/${product.getProductType()}/${product.getImgName()}" alt="${product.productName}" id="productImage">
                     </a>
                     <h2 id="productName">${product.productName}</h2>
                     <span id="productPrice">${product.price}</span>

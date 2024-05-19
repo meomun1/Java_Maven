@@ -116,25 +116,25 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>13</td>
-                        <td>p.skomorohov@email.com</td>
-                        <td>payed</td>
-                        <td><button onclick="markAsCompleted(13)">Mark Fulfilment Stage as Completed</button></td>
-                    </tr>
-                    <tr>
-                        <td>14</td>
-                        <td>a.pavlenko@email.coma</td>
-                        <td>shipping</td>
-                        <td><button onclick="markAsCompleted(14)">Mark Fulfilment Stage as Completed</button></td>
-                    </tr>
-                    <tr>
-                        <td>15</td>
-                        <td>s.ivanov@email.com</td>
-                        <td>receive_request</td>
-                        <td><button onclick="markAsCompleted(15)">Mark Fulfilment Stage as Completed</button></td>
-                    </tr>
-                    <!-- Add more rows as needed -->
+                    <c:if test="${purchases != null}">
+                      <c:forEach items="${purchases}" var="purchase">
+                              <tr>
+                                <td>${purchase.getId()}</td>
+                                <td>${purchase.getCustomer().getEmail()}</td>
+                                <td>${purchase.getPurchaseStatus().getStatusName()}</td>
+                                <td><form action="/online-store.web-1.0/management-fulfilment" method="post">
+                                  <input type="hidden" name="purchaseId" value="${purchase.getId()}">
+                                  <button type="submit">Mark Fulfilment Stage as Completed</button>
+                              </form></td>
+                              </tr>
+                      </c:forEach>
+                    </c:if>
+
+                    <c:if test="${purchases == null}">
+                        <tr>
+                            <td colspan="4">No active orders</td>
+                        </tr>
+                    </c:if>
                 </tbody>
             </table>
          </section>
