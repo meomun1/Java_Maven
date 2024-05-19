@@ -23,16 +23,12 @@ import java.io.IOException;
 @WebServlet("/sign-in")
 
 public class SignInFruitShop extends HttpServlet {
-	private static final long serialVersionUID = 1L;
 
 	public static final String LOGGED_IN_USER_ATTR = "loggedInUser";
+
+	private UserFacade userFacade = DefaultUserFacade.getInstance();
+
 	public static final String PARTNER_CODE_PARAMETER_NAME = "partner_code";
-
-	private UserFacade userFacade;
-
-	{
-		userFacade = DefaultUserFacade.getInstance();
-	}
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -45,30 +41,19 @@ public class SignInFruitShop extends HttpServlet {
 			throws ServletException, IOException {
 
 		User user = userFacade.getUserByEmail(request.getParameter("email")); // get user by email
-
 		String baseUrl = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
 				+ request.getServletContext().getContextPath();
 
 		if (user != null && user.getPassword().equals(request.getParameter("password"))) {
 
-			String partnerCode = user.getPartnerCode();
-
-			HttpSession session = request.getSession(true);
-
-			request.getSession().setAttribute(LOGGED_IN_USER_ATTR, user); // the current session is user with named
-																			// "loggedInUser"
-			session.setAttribute(PartnerCodeFilter.PARTNER_CODE_PARAMETER_NAME, partnerCode);
-
-			// In SignInFruitShop servlet
-			System.out.println("Partner code: " + partnerCode);
-
+			request.getSession().setAttribute(LOGGED_IN_USER_ATTR, user);
 			if (user.getRoleName().equals(ADMIN_ROLE_NAME)) {
 				response.sendRedirect(baseUrl + "/admin/panel");
 			} else {
 				response.sendRedirect(baseUrl + "/home-page");
 			}
 		} else { // when password or email is invalid
-			response.sendRedirect(request.getContextPath() + "/sign-in-error");
+			response.sendRedirect(request.getContextPath() + "/sign-in");
 		}
 	}
 

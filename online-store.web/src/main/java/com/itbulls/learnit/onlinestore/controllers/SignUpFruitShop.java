@@ -1,11 +1,15 @@
 package com.itbulls.learnit.onlinestore.controllers;
 
+import com.itbulls.learnit.onlinestore.Configurations;
 import com.itbulls.learnit.onlinestore.core.facades.UserFacade;
 import com.itbulls.learnit.onlinestore.core.facades.impl.DefaultUserFacade;
+import com.itbulls.learnit.onlinestore.core.services.Validator;
+import com.itbulls.learnit.onlinestore.core.services.impl.PasswordValidator;
 import com.itbulls.learnit.onlinestore.persistence.enteties.User;
 import com.itbulls.learnit.onlinestore.persistence.enteties.impl.DefaultUser;
-import static com.itbulls.learnit.onlinestore.filters.PartnerCodeFilter.*;
+import com.itbulls.learnit.onlinestore.filters.PartnerCodeFilter;
 
+import jakarta.annotation.Resource;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.Cookie;
@@ -13,12 +17,15 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ResourceBundle;
 
 @WebServlet("/sign-up")
 
 public class SignUpFruitShop extends HttpServlet {
 
 	private UserFacade userFacade = DefaultUserFacade.getInstance();
+	private Validator validator = PasswordValidator.getInstance();
+	private ResourceBundle rb = ResourceBundle.getBundle(Configurations.RESOURCE_BUNDLE_BASE_NAME);
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -27,7 +34,7 @@ public class SignUpFruitShop extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/views/sign-up.jsp").forward(request, response);
+		request.getRequestDispatcher(Configurations.VIEWS_PATH_RESOLVER + "sign-up.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -38,43 +45,38 @@ public class SignUpFruitShop extends HttpServlet {
 				+ request.getServerPort()
 				+ request.getServletContext().getContextPath();
 
-		// Validate email format
-		String email = request.getParameter("email");
-		User existingUser = userFacade.getUserByEmail(email);
-		if(existingUser != null){
-			request.setAttribute("errorMessage", "This mail has been used, please try another one.");
-			request.getRequestDispatcher("/WEB-INF/views/sign-up.jsp").forward(request, response);
-			return;
-		}
-
-		// Validate password format
-		String password = request.getParameter("password");
-		String passwordRegex = "^(?=.*[A-Z])(?=.*[@#$%^&+=!])(?=\\S+$).{8,}$";
-		if (password == null || !password.matches(passwordRegex)) {
-			request.setAttribute("errorMessage",
-					"Password must be at least 8 characters long, contain at least one uppercase letter and one special character.");
-			request.getRequestDispatcher("/WEB-INF/views/sign-up.jsp").forward(request, response);
-			return;
-		}
-
-		// Validate password confirmation
-		String passwordConfirmation = request.getParameter("repeat_password");
-		if (!password.equals(passwordConfirmation)) {
-			request.setAttribute("errorMessage", "Password confirmation does not match the password.");
-			request.getRequestDispatcher("/WEB-INF/views/sign-up.jsp").forward(request, response);
-			return;
-		}
-
 		User user = new DefaultUser();
 		user.setFirstName(request.getParameter("firstName"));
 		user.setLastName(request.getParameter("lastName"));
 		user.setEmail(request.getParameter("email"));
-		user.setPassword(password);
+		user.setPassword(request.getParameter("password"));
+
+		// Validate email format
+		User existingUser = userFacade.getUserByEmail(user.getEmail());
+		if (existingUser != null) {
+			request.setAttribute("errorMessage", rb.getString("signup.err.msg.email.exists"));
+			response.sendRedirect(baseURL + "/sign-up");
+			return;
+		}
+
+		// Validate password confirmation
+		if (!user.getPassword().equals(request.getParameter("repeat_password"))) {
+			request.setAttribute("errorMessage", rb.getString("signup.err.msg.repeat.password"));
+			response.sendRedirect(baseURL + "/signup");
+			return;
+		}
+
+		// Validate password format
+		if (!validator.isValidate(user.getPassword())) {
+			request.setAttribute("errorMessage", rb.getString("signup.err.msg.special.character"));
+			request.getRequestDispatcher("/WEB-INF/views/sign-up.jsp").forward(request, response);
+			return;
+		}
 
 		String partnerCode = null;
 		if (request.getCookies() != null) {
 			for (Cookie cookie : request.getCookies()) {
-				if (cookie.getName().equals(PARTNER_CODE_COOKIE_NAME)) {
+				if (cookie.getName().equals(PartnerCodeFilter.PARTNER_CODE_COOKIE_NAME)) {
 					partnerCode = cookie.getValue();
 				}
 			}
