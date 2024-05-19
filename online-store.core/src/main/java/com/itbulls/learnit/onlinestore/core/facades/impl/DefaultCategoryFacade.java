@@ -25,9 +25,7 @@ public class DefaultCategoryFacade implements CategoryFacade {
 
     @Override
     public List<Category> getCategories() {
-        // TODO Auto-generated method stub
-        // return categoryConverter.
-        return null;
+        return categoryConverter.convertCategoryDtosToCategories(categoryDao.getCategories());
     }
     
 }

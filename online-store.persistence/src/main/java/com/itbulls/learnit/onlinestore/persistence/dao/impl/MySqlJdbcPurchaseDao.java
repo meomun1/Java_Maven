@@ -24,7 +24,8 @@ public class MySqlJdbcPurchaseDao implements PurchaseDao {
 	@Override
 	public void savePurchase(PurchaseDto purchase) {
 		try (var conn = DBUtils.getConnection();
-				var ps = conn.prepareStatement("INSERT INTO purchase (fk_purchase_user, fk_purchase_purchase_status) VALUES (?, ?);",
+				var ps = conn.prepareStatement(
+						"INSERT INTO purchase (fk_purchase_user, fk_purchase_purchase_status) VALUES (?, ?);",
 						Statement.RETURN_GENERATED_KEYS);
 				var psPurchaseProduct = conn
 						.prepareStatement("INSERT INTO purchase_product (purchase_id, product_id) VALUES (?, ?)")) {
@@ -99,13 +100,14 @@ public class MySqlJdbcPurchaseDao implements PurchaseDao {
 
 	@Override
 	public List<PurchaseDto> getNotCompletedPurchase(Integer lastFulfilmentStageId) {
-		try(var conn = DBUtils.getConnection();
-				var ps = conn.prepareStatement("SELECT * FROM purchase WHERER fk_purchase_purchase_status != " + lastFulfilmentStageId)){
+		try (var conn = DBUtils.getConnection();
+				var ps = conn.prepareStatement("SELECT * FROM purchase WHERE fk_purchase_purchase_status != ?")) {
+			ps.setInt(1, lastFulfilmentStageId);
 
 			List<PurchaseDto> purchases = new ArrayList<>();
-		
-			try(var rs = ps.executeQuery()){ // find all purchase that are not completed
-				while(rs.next()){
+
+			try (var rs = ps.executeQuery()) { // find all purchase that are not completed
+				while (rs.next()) {
 					PurchaseDto purchase = populatePurchaseDto(conn, rs);
 					purchases.add(purchase);
 				}
@@ -125,7 +127,7 @@ public class MySqlJdbcPurchaseDao implements PurchaseDao {
 			ps.setInt(1, purchaseId);
 
 			try (var rs = ps.executeQuery()) {
-				if(rs.next()){
+				if (rs.next()) {
 					return populatePurchaseDto(conn, rs);
 				}
 
@@ -139,8 +141,9 @@ public class MySqlJdbcPurchaseDao implements PurchaseDao {
 
 	@Override
 	public void updatePurchase(PurchaseDto purchase) {
-		try (var conn = DBUtils.getConnection(); 
-				var ps = conn.prepareStatement("UPDATE `learn_it_db`.`purchase` SET `fk_purchase_purchase_status` = ? WHERE (`id` = ?);")) {
+		try (var conn = DBUtils.getConnection();
+				var ps = conn.prepareStatement(
+						"UPDATE `final_task`.`purchase` SET `fk_purchase_purchase_status` = ? WHERE (`id` = ?);")) {
 			ps.setInt(1, purchase.getPurchaseStatusDto().getId());
 			ps.setInt(2, purchase.getId());
 			ps.executeUpdate();
@@ -149,7 +152,7 @@ public class MySqlJdbcPurchaseDao implements PurchaseDao {
 		}
 	}
 
-	public PurchaseDto populatePurchaseDto(Connection conn, ResultSet rs ) throws SQLException{
+	public PurchaseDto populatePurchaseDto(Connection conn, ResultSet rs) throws SQLException {
 		PurchaseDto purchase = new PurchaseDto();
 		purchase.setId(rs.getInt("id"));
 		purchase.setUserDto(userDao.getUserById(rs.getInt("fk_purchase_user")));
@@ -164,8 +167,8 @@ public class MySqlJdbcPurchaseDao implements PurchaseDao {
 			}
 		}
 		purchase.setProductDtos(products);
-		purchase.setPurchaseStatusDto(purchaseStatusDao.getPurchaseStatusById(rs.getInt("fk_purchase_purchase_status")));
-		
+		purchase.setPurchaseStatusDto(
+				purchaseStatusDao.getPurchaseStatusById(rs.getInt("fk_purchase_purchase_status")));
 
 		return purchase;
 	}

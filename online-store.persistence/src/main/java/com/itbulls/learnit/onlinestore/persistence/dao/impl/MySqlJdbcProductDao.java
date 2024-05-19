@@ -26,7 +26,7 @@ public class MySqlJdbcProductDao implements ProductDao {
 		product.setCategoryDto(categoryDao.getCategoryByCategoryId(rs.getInt("category_id")));
 		product.setProducType(rs.getString("product_type"));
 		product.setDescription(rs.getString("description"));
-		product.setImgName(rs.getString("image_name"));
+		product.setImgName(rs.getString("img_name"));
 		return product;
 	}
 
@@ -65,7 +65,7 @@ public class MySqlJdbcProductDao implements ProductDao {
 					product.setCategoryDto(categoryDao.getCategoryByCategoryId(rs.getInt("category_id")));
 					product.setProducType(rs.getString("product_type"));
 					product.setDescription(rs.getString("description"));
-					product.setImgName(rs.getString("image_name"));
+					product.setImgName(rs.getString("img_name"));
 					return product;
 				}
 			}
