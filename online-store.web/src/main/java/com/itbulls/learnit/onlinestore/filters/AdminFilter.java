@@ -44,7 +44,7 @@ public class AdminFilter extends HttpFilter implements Filter {
 				      + request.getServerName()
 				      + ":"
 				      + request.getServerPort()
-				      + request.getServletContext().getContextPath() + "/signin.html");
+				      + request.getServletContext().getContextPath() + "/sign-in");
 		}
 	}
 

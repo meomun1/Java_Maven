@@ -3,6 +3,7 @@ package com.itbulls.learnit.onlinestore.controllers;
 import com.itbulls.learnit.onlinestore.Configurations;
 import com.itbulls.learnit.onlinestore.core.facades.UserFacade;
 import com.itbulls.learnit.onlinestore.core.facades.impl.DefaultUserFacade;
+import com.itbulls.learnit.onlinestore.filters.PartnerCodeFilter;
 import com.itbulls.learnit.onlinestore.persistence.enteties.User;
 
 import static com.itbulls.learnit.onlinestore.persistence.dto.RoleDto.*;
@@ -12,6 +13,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 
 /**
@@ -48,9 +51,16 @@ public class SignInFruitShop extends HttpServlet {
 
 		if (user != null && user.getPassword().equals(request.getParameter("password"))) {
 
+			String partnerCode = user.getPartnerCode();
+
+			HttpSession session = request.getSession(true);
+
 			request.getSession().setAttribute(LOGGED_IN_USER_ATTR, user); // the current session is user with named
 																			// "loggedInUser"
-			request.getSession().setAttribute(PARTNER_CODE_PARAMETER_NAME, user.getPartnerCode());															
+			session.setAttribute(PartnerCodeFilter.PARTNER_CODE_PARAMETER_NAME, partnerCode);
+
+			// In SignInFruitShop servlet
+			System.out.println("Partner code: " + partnerCode);
 
 			if (user.getRoleName().equals(ADMIN_ROLE_NAME)) {
 				response.sendRedirect(baseUrl + "/admin/panel");

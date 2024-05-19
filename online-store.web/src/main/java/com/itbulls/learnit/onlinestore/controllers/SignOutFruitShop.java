@@ -17,7 +17,7 @@ public class SignOutFruitShop extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getSession().removeAttribute(LOGGED_IN_USER_ATTR);
+        request.getSession().invalidate();
         response.sendRedirect(request.getContextPath() + "/home-page");
     }
     
